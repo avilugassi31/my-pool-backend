@@ -6,7 +6,6 @@ async function query() {
     try {
         const collection = await dbService.getCollection('members');
         const members = await collection.find({}).toArray();
-        console.log('members:', members)
         return members;
     } catch (err) {
         logger.error('cannot find members', err);
