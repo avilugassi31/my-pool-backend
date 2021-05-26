@@ -48,7 +48,7 @@ function connectSockets(http, session) {
         socket.on('chat newMsg', (msg) => {
             gIo.to(socket.myTopic).emit('chat addMsg', msg);
         });
-        socket.on('review topic', (topic) => {
+        socket.on('member topic', (topic) => {
             if (socket.myTopic === topic) return;
             if (socket.myTopic) {
                 socket.leave(socket.myTopic);
