@@ -3,6 +3,7 @@ const userService = require('../user/user.service');
 const logger = require('../../services/logger.service');
 
 async function login(username, password) {
+    console.log('username:', username)
     logger.debug(`auth.service - login with username: ${username}`);
     const user = await userService.getByUsername(username);
     if (!user) return Promise.reject('Invalid username or password');
@@ -15,7 +16,7 @@ async function login(username, password) {
 }
 
 async function signup(imgUrl,username, password, fullname, createdAt) {
-    console.log('username in signup service:', username)
+    console.log('username in signup service:', imgUrl)
     const saltRounds = 10;
     logger.debug(
         `auth.service - signup with username: ${username}, fullname: ${fullname}`
