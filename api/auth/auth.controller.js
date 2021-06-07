@@ -15,7 +15,6 @@ async function login(req, res) {
 
 async function signup(req, res) {
     try {
-        console.log('req body in signup controller:', req.body);
         const { imgUrl, username, password, fullname, createdAt } = req.body;
         const account = await authService.signup(
             imgUrl,
@@ -24,12 +23,12 @@ async function signup(req, res) {
             fullname,
             createdAt
         );
-        console.log(account, 'account in controller');
+        console.log('account in auth controller', account);
         logger.debug(
             `auth.route - new account created: ` + JSON.stringify(account)
         );
         const user = await authService.login(username, password);
-        console.log('user in signup controller:', user);
+        console.log('user in signup AUTH controller:', user);
         req.session.user = user;
         res.json(user);
     } catch (err) {

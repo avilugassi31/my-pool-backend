@@ -1,5 +1,5 @@
 const dbService = require('../../services/db.service');
-// const logger = require('../../services/logger.service')
+const logger = require('../../services/logger.service');
 const ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
@@ -43,11 +43,11 @@ async function getById(userId) {
 }
 
 async function getByUsername(username) {
-    console.log('username:', username)
+    console.log('username in getby:', username);
     try {
         const collection = await dbService.getCollection('users');
-        const user = await collection.findOne(username);
-        console.log('user in user service by username:', user)
+        const user = await collection.findOne({ username });
+        console.log('user in user service by username:', user);
         return user;
     } catch (err) {
         logger.error(`while finding user ${username}`, err);
@@ -85,6 +85,7 @@ async function update(user) {
 }
 
 async function add(user) {
+    console.log('user in user service:', user);
     try {
         const userToAdd = {
             imgUrl: user.imgUrl,
@@ -93,6 +94,7 @@ async function add(user) {
             fullname: user.fullname,
             createdAt: user.createdAt,
         };
+        console.log('user to add in user service', userToAdd);
         const collection = await dbService.getCollection('users');
         await collection.insertOne(userToAdd);
         return userToAdd;
